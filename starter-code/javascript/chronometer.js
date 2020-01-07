@@ -1,5 +1,10 @@
 class Chronometer {
-  constructor() {}
+  constructor() {
+
+    
+
+
+  }
   // startClick() {}
   // getMinutes() {}
   // getSeconds() {}
