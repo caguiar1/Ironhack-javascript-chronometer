@@ -13,7 +13,7 @@ let milUni      = document.getElementById('milUni');
 
     
 
-setInterval(printTime, 1000);
+setInterval(printTime, 50);
 
 function printTime() {
 
@@ -46,10 +46,24 @@ function printMilliseconds() {
 }
 
 function printSplit() {
+   
 
+        document.getElementById("splits").innerHTML += `<li>${chronometer.twoDigitsNumber(chronometer.getMinutes())[0] +
+            chronometer.twoDigitsNumber(chronometer.getMinutes())[1] + " : " + 
+            chronometer.twoDigitsNumber(chronometer.getSeconds())[0] +
+            chronometer.twoDigitsNumber(chronometer.getSeconds())[1]}</li>`;
+
+        
 }
 
 function clearSplits() {
+
+    let creature = document.getElementById('splits');
+    
+    while(creature.firstChild){
+    creature.removeChild(creature.firstChild);
+}
+
 
 }
 
@@ -66,6 +80,15 @@ function setStartBtn() {
 }
 
 function setResetBtn() {
+
+    document.getElementById("splits").innerHTML = "";
+    let digits = document.getElementsByClassName("number");
+    Array.foreach()
+    console.log(typeof(digits))
+    digits.foreach((digit) =>{
+        digit.innerHTML = "0";
+    })
+            console.log("Working")
 
 }
 
@@ -100,4 +123,22 @@ btnLeft.addEventListener('click', function () {
 // Reset/Split Button
 btnRight.addEventListener('click', function () {
 
+    if(btnLeft.className == "btn stop"){
+        printSplit();
+    }
+
+
+
 });
+
+btnRight.addEventListener('click', function () {
+
+    if(btnRight.className == "btn reset"){
+
+        clearSplits();
+        setResetBtn();
+    }
+
+});
+
+
