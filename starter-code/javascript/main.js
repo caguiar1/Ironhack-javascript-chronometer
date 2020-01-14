@@ -11,6 +11,7 @@ let milUni      = document.getElementById('milUni');
 
 
 
+
     
 
 setInterval(printTime, 50);
@@ -34,11 +35,13 @@ function printTime() {
 }
 
 function printMinutes() {
-
+    minUni.innerHTML = chronometer.twoDigitsNumber(chronometer.getMinutes())[1];
+    minDec.innerHTML = chronometer.twoDigitsNumber(chronometer.getMinutes())[0];
 }
 
 function printSeconds() {
-
+    secUni.innerHTML = chronometer.twoDigitsNumber(chronometer.getSeconds())[1];
+    secDec.innerHTML = chronometer.twoDigitsNumber(chronometer.getSeconds())[0];
 }
 
 function printMilliseconds() {
@@ -46,51 +49,39 @@ function printMilliseconds() {
 }
 
 function printSplit() {
-   
-
-        document.getElementById("splits").innerHTML += `<li>${chronometer.twoDigitsNumber(chronometer.getMinutes())[0] +
-            chronometer.twoDigitsNumber(chronometer.getMinutes())[1] + " : " + 
-            chronometer.twoDigitsNumber(chronometer.getSeconds())[0] +
-            chronometer.twoDigitsNumber(chronometer.getSeconds())[1]}</li>`;
-
-        
+    document.getElementById("splits").innerHTML += `<li>${chronometer.twoDigitsNumber(chronometer.getMinutes())[0] +
+        chronometer.twoDigitsNumber(chronometer.getMinutes())[1] + " : " + 
+        chronometer.twoDigitsNumber(chronometer.getSeconds())[0] +
+        chronometer.twoDigitsNumber(chronometer.getSeconds())[1]}</li>`;
 }
 
 function clearSplits() {
-
-    let creature = document.getElementById('splits');
-    
-    while(creature.firstChild){
-    creature.removeChild(creature.firstChild);
-}
-
-
+    document.getElementById("splits").innerHTML = "";
 }
 
 function setStopBtn() {
-
+    btnLeft.className = 'btn stop';
+    btnLeft.innerHTML = "STOP";
 }
 
 function setSplitBtn() {
-
+    btnRight.className = 'btn split';
+    btnRight.innerHTML = "SPLIT";
 }
 
 function setStartBtn() {
-
+    btnLeft.className = 'btn start';
+    btnLeft.innerHTML = "START";
 }
 
 function setResetBtn() {
-
-    document.getElementById("splits").innerHTML = "";
-    let digits = document.getElementsByClassName("number");
-    Array.foreach()
-    console.log(typeof(digits))
-    digits.foreach((digit) =>{
-        digit.innerHTML = "0";
-    })
-            console.log("Working")
-
+    btnRight.className = 'btn reset';
+    btnRight.innerHTML = "RESET";
 }
+
+
+
+
 
 // Start/Stop Button
 btnLeft.addEventListener('click', function () {
@@ -122,23 +113,14 @@ btnLeft.addEventListener('click', function () {
 
 // Reset/Split Button
 btnRight.addEventListener('click', function () {
-
-    if(btnLeft.className == "btn stop"){
+    if (btnRight.className == 'btn split') {
         printSplit();
     }
-
-
-
-});
-
-btnRight.addEventListener('click', function () {
-
-    if(btnRight.className == "btn reset"){
-
+    else if (btnRight.className !== 'btn split') {
         clearSplits();
-        setResetBtn();
+        chronometer.resetClick();
+        printMinutes();
+        printSeconds();
     }
-
 });
-
 
